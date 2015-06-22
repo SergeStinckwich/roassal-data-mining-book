@@ -20,6 +20,19 @@
         {../figures/}
         {../DataSetsAndImport/}
 }
+\graphicspath{
+        {../figures/}
+        {../Graphs/}
+}
+\graphicspath{
+        {../figures/}
+        {../Export/}
+}
+\graphicspath{
+        {../figures/}
+        {../Example/}
+}
+
 
 %=================================================================
 \let\wholebook=\relax

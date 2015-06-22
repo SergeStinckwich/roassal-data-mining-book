@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>{Data Mining with Roassal: Examples and Case Studies}</title>
+    <title>{Data Mining with Roassal: Modelisation and Examples}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Highlight js -->
@@ -28,7 +28,38 @@
   <body>
 
     <div class="container text-justify">
-      <h2>II. Datasets and Import</h2>
+      <h2>II. Datasets, Import and Export</h2>
+<p>From inside Pharo, Roassal can take in entry different kind of datas, depending on the builder used. Simple data structures like collections or complexe dataset structures. For example, a RTBoxPlotDataSet will take a collection while the RTGrapher will take the RTBoxPlotDataSet itself. We will discuss the complex structure datasets that Roassal offers in the coming chapters.</p>
+<p>The challenge here will most likely be to bring the datas inside Pharo before modulate them as will.</p>
+<h3>II.1. Import from CSV</h3>
+<p>The Roassal class RTTabTable is made to work with CSV file content. Let's assume that we dispose of a &quot;data.csv&quot; file in the workdirectory of or Pharo image, with the following content:</p>
+<p><figure><pre><code class="smalltalk">names,henry,paul,bob,michel,john,ramirez
+age,15,65,33,68,24,45
+taille,1.6,1.7,1.8,1.5,1.8,1.6</code></pre><figcaption></figcaption></figure></p>
+<p>The first step is to import the content of the file in the workspace:     
+<figure><pre><code class="smalltalk">'data.csv' asFileReference contents</code></pre><figcaption></figcaption></figure></p>
+<p>Then we create an instance of RTTabTable then send it the message #input:usingDelimiter:, knowing or separators are comas:
+<figure><pre><code class="smalltalk">tab := RTTabTable new input: 'data.csv' asFileReference contents usingDelimiter: $, .</code></pre><figcaption></figcaption></figure></p><p class="note">more than one delimiter can be defined sending #input:usingDelimiters:.  </p>
+<p>At this point or datas are imported in Pharo and perfectly usable ! Let's verify now the content of or RTTabtable instance by inspecting &quot;tab&quot; or simply printing each of this line:
+<figure><pre><code class="smalltalk">tab numberOfRows.
+tab numberOfColumns.</code></pre><figcaption></figcaption></figure>
+We should obtain 3 and 7. Note that by inspecting
+<figure><pre><code class="smalltalk">tab values</code></pre><figcaption></figcaption></figure>
+we see that or structure is just 3 arrays of values for 3 rows.</p>
+<p>We can also import the csv file from an URL. In that case:
+<figure><pre><code class="smalltalk">tab := RTTabTable new input: 'http://bl.ocks.org/mbostock/raw/4063318/dji.csv' asUrl retrieveContents usingDelimiter: $, .</code></pre><figcaption></figcaption></figure></p>
+<h3>II.2. Export to CSV</h3>
+<p class="todo">Create #RTTabTable&gt;&gt;exportTo:usingDelimiter:</p>
+<h3>II.3. Import via SQLite3</h3>
+<p>It exist other pharo packages, external from Roassal, to import datas into Pharo. Here is an example with the NBSQLite3 package to import .db files and extarct a perfectly usable content for Roassal.</p>
+<p class="todo">a complete example ? Reference other Sources (more complex installation, specially Linux)?</p>
+<p class="todo">Other formats like SAS, ODBC, XLS ?</p>
+
+
+
+
+
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

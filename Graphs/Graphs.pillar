@@ -1,0 +1,49 @@
+!Common graphs and builders
+In the introduction we talked about the Roassal builders to cover the most common modelisation in Data Mining. In this Chapter we will present and explain the functionning of these builders and create in examples histograms, bar plots, scatter plots, radar and pie charts etc...
+We will also discover and manage our datas.
+
+In Roassal, simplicity comes with modularisation. In that case It is always easy to create a composition of graphs. Most of graphs like an histogram will need axises in adition to the visualization of datas itself. That is why in Roassal we will create this graph using a composition of two builders. Indeed the structure of a common graph will be composed of a RTGrapher, to manage the axises and then the dataSet is added to it. The RTGrapher is finally built.
+
+The graph structure using RTGRapher:
+[[[
+graph := RTGrapher new.
+dataSet := <aRTAbstractDataSet>.
+graph add: dataSet.
+graph build.
+]]]
+ 
+!!Histogram
+Coming back to our data.csv content saw in the previous chapter we will now manage this datas to create an histogram on the ages.
+
+@@todo when change width of RTStackedDataSet, get out of the extent of RTGrapher, worse cross each others...
+
+First we will process a bit our data to obtain some really simple datas. We will need the two first rows of our table, and as we just import them from csv we will change the ages from String to Integer:
+
+[[[
+tab := RTTabTable new.
+tab input: 'data.csv' asFileReference contents usingDelimiter: $,.
+
+myDatas := (tab removeColumn: 1) values first:2.
+myDatas at:2 put: (myDatas second collect: [ :s | s asInteger ]).
+]]]
+
+Now our datas are just an array of two values arrays. From this we can make ou Histogram:
+
+[[[
+b := RTGrapher new.
+
+ds := RTStackedDataSet new.
+ds points: myDatas second. 
+ds barShape rectangle width: 30.
+
+b add: ds.
+b build.
+]]]
+
+We create an instance of RTGrapher and an instance of RTStackedDataSet. We define the points of our data set to be the array of ages. We define the shapes we want, add the data set to the grapher and build this last one. Now we can inspect the view:
+
+[[[
+b view inspect
+]]]
+
++A pillar>file://figures/histo1.svg+
