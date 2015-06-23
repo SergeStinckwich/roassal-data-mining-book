@@ -14,25 +14,9 @@
 % Add the path for the figures of each chapter here:
 \graphicspath{
         {../figures/}
+        {../Graphs/}
         {../Introduction/}
 }
-\graphicspath{
-        {../figures/}
-        {../DataSetsAndImport/}
-}
-\graphicspath{
-        {../figures/}
-        {../Graphs/}
-}
-\graphicspath{
-        {../figures/}
-        {../Export/}
-}
-\graphicspath{
-        {../figures/}
-        {../Example/}
-}
-
 
 %=================================================================
 \let\wholebook=\relax

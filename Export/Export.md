@@ -1,7 +1,0 @@
-
-
-##IV\. Exporting modelisations
-
-This part shows how to export your modelisation in different formats\. Almost any kind of visualizations made with Roassal can be exported in Pdf, Svg or Html using one of the Exporter: RTHTML5Exporter, RTSVGExporer etc\. 
-
-All the previous examples can be exported:

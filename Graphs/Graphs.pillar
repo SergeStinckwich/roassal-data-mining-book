@@ -46,4 +46,4 @@ We create an instance of RTGrapher and an instance of RTStackedDataSet. We defin
 b view inspect
 ]]]
 
-+A pillar>file://figures/histo1.svg+
++Histogram 1>file://figures/histo1.png+
