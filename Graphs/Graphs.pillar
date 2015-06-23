@@ -4,7 +4,7 @@ We will also discover and manage our datas.
 
 In Roassal, simplicity comes with modularisation. In that case It is always easy to create a composition of graphs. Most of graphs like an histogram will need axises in adition to the visualization of datas itself. That is why in Roassal we will create this graph using a composition of two builders. Indeed the structure of a common graph will be composed of a RTGrapher, to manage the axises and then the dataSet is added to it. The RTGrapher is finally built.
 
-The graph structure using RTGRapher:
+The graph structure using RTGrapher:
 [[[
 graph := RTGrapher new.
 dataSet := <aRTAbstractDataSet>.
@@ -13,37 +13,56 @@ graph build.
 ]]]
  
 !!Histogram
-Coming back to our data.csv content saw in the previous chapter we will now manage this datas to create an histogram on the ages.
+Coming back to our data.csv content saw in the previous chapter we will now manage this datas to create an histogram on the frequency of the level of education.
 
-@@todo when change width of RTStackedDataSet, get out of the extent of RTGrapher, worse cross each others...
+@@todo when change width of RTStackedDataSet, get out of the extent of RTGrapher, worse cross each others... RTHistogramSet is a lot better but still can't manage a gapSize
 
-First we will process a bit our data to obtain some really simple datas. We will need the two first rows of our table, and as we just import them from csv we will change the ages from String to Integer:
+First we will process a bit our data to obtain usable datas for our histogram. We need to remove the first informative row of our table, and as we just import them from csv we will change the training level, work experience, salary and sales from String to Integer:
 
 [[[
 tab := RTTabTable new.
-tab input: 'data.csv' asFileReference contents usingDelimiter: $,.
+tab input: 'data.csv' asFileReference contents usingDelimiter: $, .
 
-myDatas := (tab removeColumn: 1) values first:2.
-myDatas at:2 put: (myDatas second collect: [ :s | s asInteger ]).
+tab removeFirstRow.
+tab convertColumnsAsInteger: #(3 4 5 6).
 ]]]
 
-Now our datas are just an array of two values arrays. From this we can make ou Histogram:
+The histogram needs an indexable in entry so we give it the values of our table:
 
 [[[
 b := RTGrapher new.
 
-ds := RTStackedDataSet new.
-ds points: myDatas second. 
-ds barShape rectangle width: 30.
+ds := RTHistogramSet new.
+ds points: tab values. 
+ds y: #second.
 
-b add: ds.
+b add: ds. 
 b build.
 ]]]
 
-We create an instance of RTGrapher and an instance of RTStackedDataSet. We define the points of our data set to be the array of ages. We define the shapes we want, add the data set to the grapher and build this last one. Now we can inspect the view:
+We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, add the data set to the grapher and build it. Now we can inspect the view:
 
 [[[
 b view inspect
 ]]]
 
-+Histogram 1>file://figures/histo1.png+
++Histogram 1>file://figures/histo1.png|width=50+
+
+We can now complete our histogram....
+
+[[[
+b := RTGrapher new.
+
+ds := RTHistogramSet new.
+ds points: tab values. 
+ds barShape rectangle; width: 30.
+ds y: #second.
+ds barChartWithBarTitle: #second.
+
+b add: ds. 
+b axisX title: 'Education'.
+b axisY title: 'Frequency'.
+b build.
+]]]
+
++Histogram 1>file://figures/histo2.png|width=50+
