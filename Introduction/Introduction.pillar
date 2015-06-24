@@ -1,6 +1,8 @@
 !Introduction
 
-This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained. 
+This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
+Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference.
+
 
 !!Data Mining
 
@@ -16,6 +18,10 @@ The idea of a Rossal builder is to make the creation of a modelisation faster, e
 Based on that principle and given a list of builders, Roassal cover all the typical modelisations.
 
 Histogtam: RTGrapher combined with a RTHistogramSet   
-@@todo list of graphs and builders associated
+@@todo list of graphs and builders associated ?
 
-From now on, it will be assumed that the reader has a Pharo image opened with a recent version of Roassal installed in order to try the examples. In any case we will try to make this examples as clear as possible, and will always be executable in a Pharo workspace.   
+!!Let's start !
+
+From now on, it will be assumed that the reader has a Pharo image opened with a recent version of Roassal installed in order to try the examples. 
+
+In any case we will try to make this examples as clear as possible, and will always be executable in a Pharo workspace. Moreover, notice that we will show simple examples, the most direct way to the objective, but as Roassal is part of Pharo, a fully oriented-object programmation language and environnement, there is always a lot of other ways as complex and complete as desired to modelise our datas.

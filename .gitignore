@@ -29,3 +29,6 @@ files/
 /package-cache
 /book-result
 /texput.log
+/__MACOSX
+PharoV40.sources
+/play-cache

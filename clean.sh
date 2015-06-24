@@ -16,4 +16,4 @@ for chapter in `$PILLAR_COMMAND show inputFiles`; do
 	# cd ..
 done
 
-rm -fr .DS_Store vm.sh vm-ui.sh package-cache stderr stdout book-result texput.log
+rm -fr *.zip *~ .DS_Store vm.sh vm-ui.sh package-cache stderr stdout book-result texput.log

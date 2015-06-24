@@ -16,4 +16,4 @@ for chapter in `$PILLAR_COMMAND show inputFiles`; do
 	# cd ..
 done
 
-rm -fr .DS_Store Pharo.changes Pharo.image pharo-vm pharo-ui vm.sh vm-ui.sh pharo pillar package-cache stderr stdout book-result texput.log
+rm -fr *.zip *~ .DS_Store __MACOSX Pharo.changes Pharo.image pharo-vm pharo-ui PharoV40.sources vm.sh vm-ui.sh pharo pillar package-cache stderr stdout book-result texput.log
