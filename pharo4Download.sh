@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IMAGE="http://moosetechnology.org/res/download/moose_image_5_1.zip"
+IMAGE="http://files.pharo.org/get-files/40/pharo.zip"
 SOURCES="http://files.pharo.org/get-files/40/sources.zip"
 
 get_sources() {
@@ -36,10 +36,7 @@ get_image() {
 echo get sources
 get_sources
 
-echo get moose
+echo get Pharo 4
 get_image
 
 ./loadAndFixPillar.sh
-
-
-
