@@ -6,54 +6,64 @@ The challenge here will most likely be to bring the datas inside Pharo before mo
 
 !!Import from CSV
 
-The Roassal class RTTabTable is made to work with CSV file content. Let's assume that we dispose of a "data.csv" file in the workdirectory of our Pharo image, with the following content:
+We will use the package NeoCSV to work with our CSV format datas. Let's assume that we dispose of this "iris.csv" file in the workdirectory of our Pharo image, that looks like this:
 
 [[[
-division,level of education,training level,work experience,salary,sales
-peripherals,bachelor's degree,1,0,58425,112606
-computer hardware,bachelor's degree,0,8,92001,290013
-office supplies,some college,1,7,81628,304954
-printers,high school,1,7,84948,328512
-office supplies,associate's degree,1,5,82473,249337
-printers,some college,2,14,140107,642076
-printers,some college,0,7,80039,297766
-peripherals,associate's degree,3,4,88201,385296
-computer hardware,some college,1,3,79902,263814
-computer hardware,associate's degree,2,6,90303,353030
+5.1,3.5,1.4,0.2,Iris-setosa
+4.9,3.0,1.4,0.2,Iris-setosa
+4.7,3.2,1.3,0.2,Iris-setosa
+4.6,3.1,1.5,0.2,Iris-setosa
+5.0,3.6,1.4,0.2,Iris-setosa
+5.4,3.9,1.7,0.4,Iris-setosa
+4.6,3.4,1.4,0.3,Iris-setosa
+5.0,3.4,1.5,0.2,Iris-setosa
+4.4,2.9,1.4,0.2,Iris-setosa
+4.9,3.1,1.5,0.1,Iris-setosa
+5.4,3.7,1.5,0.2,Iris-setosa
+4.8,3.4,1.6,0.2,Iris-setosa
+4.8,3.0,1.4,0.1,Iris-setosa
+4.3,3.0,1.1,0.1,Iris-setosa
+5.8,4.0,1.2,0.2,Iris-setosa
+5.7,4.4,1.5,0.4,Iris-setosa
+5.4,3.9,1.3,0.4,Iris-setosa
+5.1,3.5,1.4,0.3,Iris-setosa
+5.7,3.8,1.7,0.3,Iris-setosa
+5.1,3.8,1.5,0.3,Iris-setosa
+etc.
+]]]
+@@note more info in the Introduction
+
+The first step is to import the content of the file in the workspace and create a read stream:     
+[[[
+('iris.csv' asFileReference contents readStream)
 ]]]
 
-This datas represents sales figures for employees along with a few factors that may influence sales.  from http://royce.kimmons.me/tools/generated_data/sales
-
-The first step is to import the content of the file in the workspace:     
+Then we read this stream with NeoCSVReader, knowing or separators are comas, the delimiter by default:
 [[[
-'data.csv' asFileReference contents
+(NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) upToEnd.
 ]]]
 
-Then we create an instance of RTTabTable then send it the message #input:usingDelimiter:, knowing or separators are comas:
-[[[
-tab := RTTabTable new input: 'data.csv' asFileReference contents usingDelimiter: $, .
-]]]
-@@note more than one delimiter can be defined sending #input:usingDelimiters:.  
+At this point or datas are imported in Pharo and perfectly usable !
 
-At this point or datas are imported in Pharo and perfectly usable ! Let's verify now the content of or RTTabtable instance by inspecting "tab" or simply printing each of this line:
-[[[
-tab numberOfRows.
-tab numberOfColumns.
-]]]
-We should obtain 11 and 6. Note that by inspecting
-[[[
-tab values
-]]]
-we see that or structure is just 11 arrays of values for 11 columns.
+Note that by inspecting it we get an Array (size 150), of arrays (size 5), which represent well our iris datas.
+
+@@todo could be interesting to have a method summary that create a table resume of our datas
 
 We can also import the csv file from an URL. In that case:
+
 [[[
-tab := RTTabTable new input: 'http://bl.ocks.org/mbostock/raw/4063318/dji.csv' asUrl retrieveContents usingDelimiter: $, .
+(NeoCSVReader on: ('myUrl' asUrl retrieveContents readStream) ) upToEnd.
 ]]]
 
 !!Export to CSV
 
-@@todo Create #RTTabTable>>exportTo:usingDelimiter:
+We can easily export datas to csv format using NeoCSVWritter. For example:
+
+[[[
+String streamContents: [ :stream |
+	   (NeoCSVWriter on: stream)
+	   nextPutAll: #( (x y z) (10 20 30) (40 50 60) (70 80 90) ) ].
+]]]
 
 !!Import via SQLite3
 

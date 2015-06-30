@@ -1,8 +1,7 @@
 !Introduction
 
 This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
-Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference.
-
+Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference. As to simplify the comparison of the two documents, we will use here the exact same datasets.
 
 !!Data Mining
 
@@ -19,6 +18,16 @@ Based on that principle and given a list of builders, Roassal cover all the typi
 
 Histogtam: RTGrapher combined with a RTHistogramSet   
 @@todo list of graphs and builders associated ?
+
+!!The DataSets
+We will use in our demonstrations and example the Iris Dataset. It contains 50 samples from each three classes of iris flowers Frank and Asuncion, 2010. One class is linearly separable from the other two, while the latter are not linearly separable from each other.  There
+are five attributes in the dataset:
+
+==-== sepal length in cm
+==-== sepal width in cm
+==-== petal length in cm
+==-== petal width in cm
+==-== class: Iris Setosa, Iris Versicolour, and Iris Virginica
 
 !!Let's start !
 

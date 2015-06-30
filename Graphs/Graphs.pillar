@@ -13,56 +13,43 @@ graph build.
 ]]]
  
 !!Histogram
-Coming back to our data.csv content saw in the previous chapter we will now manage this datas to create an histogram on the frequency of the level of education.
+Coming back to our iris.csv content saw in the previous chapter we will now manage this datas to create an histogram on the frequency of the epal length.
 
-@@todo when change width of RTStackedDataSet, get out of the extent of RTGrapher, worse cross each others... RTHistogramSet is a lot better but still can't manage a gapSize
+@@todo RTHistogramSet can't manage a gapSize
 
-First we will process a bit our data to obtain usable datas for our histogram. We need to remove the first informative row of our table, and as we just import them from csv we will change the training level, work experience, salary and sales from String to Integer:
-
-[[[
-tab := RTTabTable new.
-tab input: 'data.csv' asFileReference contents usingDelimiter: $, .
-
-tab removeFirstRow.
-tab convertColumnsAsInteger: #(3 4 5 6).
-]]]
-
-The histogram needs an indexable in entry so we give it the values of our table:
+First we will process a bit our data to obtain usable datas for our histogram. As we just imported our datas from csv we will change the for first fields from String to Integer, and puts our datas in a variable:
 
 [[[
-b := RTGrapher new.
-
-ds := RTHistogramSet new.
-ds points: tab values. 
-ds y: #second.
-
-b add: ds. 
-b build.
+iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) 
+   	  addIntegerField; addIntegerField; addIntegerField; addIntegerField; addField; upToEnd.
 ]]]
 
-We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, add the data set to the grapher and build it. Now we can inspect the view:
-
+We now need to take the first row of theses datas and ask Roassal to make the histogram:
 [[[
-b view inspect
-]]]
+(iris collect: [ :i | i first ]) histogram
+]]]	  
+
+and obtain our first histogram Figure1.
 
 +Histogram 1>file://figures/histo1.png|width=50+
 
-We can now complete our histogram....
-
+Having a look to the method histogram we can customize it easily, following the structure:
 [[[
 b := RTGrapher new.
+b extent: 400@200.
 
 ds := RTHistogramSet new.
-ds points: tab values. 
-ds barShape rectangle; width: 30.
-ds y: #second.
-ds barChartWithBarTitle: #second.
+ds points: (iris collect: [ :i | i first ]).
+ds barShape width: 40; color: Color darkGray.
+ds barChartWithBarTitle: [ :vls |  vls second average round:1  ] rotation: 0 color: Color black.
 
 b add: ds. 
-b axisX title: 'Education'.
+b axisX title: 'Sepal.Length'.
 b axisY title: 'Frequency'.
+
 b build.
 ]]]
 
-+Histogram 1>file://figures/histo2.png|width=50+
+We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, add the data set to the grapher and build it.
+
++Histogram 2>file://figures/histo2.png|width=50+
