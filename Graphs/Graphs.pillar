@@ -50,6 +50,65 @@ b axisY title: 'Frequency'.
 b build.
 ]]]
 
+@@todo RTDistribution does not work with String, merge with SciSmalltalk ? The histogram construction can be improved by knowing the width of the dataset 
+
 We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, add the data set to the grapher and build it.
 
 +Histogram 2>file://figures/histo2.png|width=50+
+
+!!Density plot
+
+!!Pie chart
+
+The frequency of each iris names can be obtain in an annoted array this way:
+
+[[[
+ds := RTDistribution new on: (iris collect: [ :i | i last ]); annotatedFrequencyOfDifferentObjects
+]]] 
+
+The algorithm is quite easy, we can do another one on our own:
+[[[
+ds := iris collect: [ :i | i last ].	
+
+ds := (ds asSet collect: [ :name |
+	{(ds count: [ :i | i = name]). name}
+	 ]) asArray.
+]]]
+
+Then we can get a pie chart with:
+[[[
+b := RTPieBuilder new.
+b interaction popup.
+b objects: ds.
+b slice: #first.
+b normalizer distinctColor.	
+b labelled: #second.
+b build.
+]]]
++Pie chart>file://figures/pie1.png|width=50+
+
+@@todo RTPieBuilder does not work with a Set for objects, problems with labels size
+
+!!Bar plot
+
+To do a bar plot we use now the RTGrapher and add it a RTStackedDataSet:
+[[[
+b := RTGrapher new.	
+dt := RTStackedDataSet new.
+dt points: ds.
+dt y: #first.
+dt barShape color: Color darkGray; width: 50.
+dt barChartWithBarTitle: #second.
+b add: dt.
+b axisX noTick; noLabel.
+b build.
+]]]
++Bar plot>file://figures/bar1.png|width=50+
+
+@@note In this case the histogram can also be used:
+
+[[[
+(iris collect: [ :i | i last ]) histogram
+]]]
++Histogram 3>file://figures/histo3.png|width=50+
+
