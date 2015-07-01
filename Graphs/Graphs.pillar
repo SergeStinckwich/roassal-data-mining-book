@@ -17,6 +17,8 @@ Coming back to our iris.csv content saw in the previous chapter we will now mana
 
 @@todo RTHistogramSet can't manage a gapSize
 
+@@todo RTHistogramSet should use SciSmalltalk histograms
+
 First we will process a bit our data to obtain usable datas for our histogram. As we just imported our datas from csv we will change the for first fields from String to Integer, and puts our datas in a variable:
 
 [[[
@@ -62,6 +64,7 @@ We create an instance of RTGrapher and an instance of RTHistogramSet. We define 
 
 The frequency of each iris names can be obtain in an annoted array this way:
 
+@@todo Distribution should be from SciSmalltalk
 [[[
 ds := RTDistribution new on: (iris collect: [ :i | i last ]); annotatedFrequencyOfDifferentObjects
 ]]] 
@@ -105,8 +108,7 @@ b build.
 ]]]
 +Bar plot>file://figures/bar1.png|width=50+
 
-@@note In this case the histogram can also be used:
-
+Note that in this case the histogram can also be used:
 [[[
 (iris collect: [ :i | i last ]) histogram
 ]]]

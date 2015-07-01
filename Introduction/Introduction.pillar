@@ -3,6 +3,8 @@
 This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
 Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference. As to simplify the comparison of the two documents, we will use here the exact same datasets.
 
+Moreover, for more detailed explanations on some of incoming subjects see the Document "Object-Oriented Implementation of Numerical Methods An Introduction with Smalltalk" Didier H. Besset. The classes implemented in this Document are going to be needed. The SciSmalltalk project includes these, available at https://github.com/SergeStinckwich/SciSmalltalk.
+
 !!Data Mining
 
 @@todo petite introduction au data mining ?
