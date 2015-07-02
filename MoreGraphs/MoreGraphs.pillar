@@ -4,5 +4,39 @@ This chapter is about investigations on multiple variables in the same of our da
 
 @@note more about covariance can be found on a more detailed document: NumericalMethods, see Introduction, the classes implemented in this Document are going to be needed available at https://github.com/SergeStinckwich/SciSmalltalk
 
+!!Covariance and correlation
+First we will investigate covariance between columns of our datas. Let's take out the last column:
+[[[
+iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) 
+   	  addIntegerField; addIntegerField; addIntegerField; addIntegerField; addField; upToEnd.
 
+ds := iris collect: [ :i | i allButLast ].	
+]]]	
 
+Then we can get or covariance matrix using the DhbCovarianceAccumulator class:
+[[[
+accumulator := DhbCovarianceAccumulator new: 4.
+
+ds do: [ :x | accumulator accumulate: x asDhbVector].
+covarianceMatrix := accumulator covarianceMatrix.
+]]]	
+
+@@todo DhbCovarianceAccumulator missing method to have a direct covariance between two columns ? Add method to easily round all cells ?
+
+@@todo nice tables in Roassal ?
+
+And print the result in a nice table:
+[[[
+view := RTView new.
+substrings := #('Sepal.Length' 'Sepal.Width' 'Petal.Length' 'Petal.Width') asOrderedCollection.
+table do: [:r |
+	r do: [ :cell | substrings add: cell asString ]].
+view addAll: (RTLabel elementsOn: substrings).
+RTCellLayout new lineItemsCount:4; gapSize: 10; applyOn: view elements.
+^ view
+]]]
++Covariance matrix>file://figures/table1.png|width=80+
+
+@@todo not exactly same result than in R ?
+
+About correlation
