@@ -17,7 +17,7 @@ Then we can get or covariance matrix using the DhbCovarianceAccumulator class:
 [[[
 accumulator := DhbCovarianceAccumulator new: 4.
 
-ds do: [ :x | accumulator accumulate: x asDhbVector].
+ds do: [ :x | accumulator accumulate: x].
 covarianceMatrix := accumulator covarianceMatrix.
 ]]]	
 
@@ -39,4 +39,26 @@ RTCellLayout new lineItemsCount:4; gapSize: 10; applyOn: view elements.
 
 @@todo not exactly same result than in R ?
 
-About correlation
+@@todo Easy way for correlation from the covariance matrix ? Why DhbStatisticalMoments can't take 4 columns ??
+
+About correlation, We will need to divide our tables values by respective standard deviations of their respective columns.
+ 
+We can get a standard deviation:
+[[[
+sd := DhbFastStatisticalMoments new.
+(ds collect: [ :m | m first ]) do: [ :x | sd accumulate: x ].
+sd standardDeviation.
+]]]
+
+So now we can have our correlation table by:
+[[[
+table := covarianceMatrix rows collectWithIndex: [:c :i | c collectWithIndex: [ :cell :j |
+sd1 := DhbFastStatisticalMoments new.
+sd2 := DhbFastStatisticalMoments new.
+(ds collect: [ :m | m at: i ]) do: [ :x | sd1 accumulate: x ].
+(ds collect: [ :m | m at: j ]) do: [ :x | sd2 accumulate: x  ]. 	
+(cell / (sd1 standardDeviation * sd2 standardDeviation)) round: 7]].
+]]]
+
++Correlation matrix>file://figures/table2.png|width=80+
+ 
