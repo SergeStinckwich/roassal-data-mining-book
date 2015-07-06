@@ -121,7 +121,38 @@ b build.
 
 @@note To distinguish the probable overlaps between points, we can define a weaker alpha value for colors
 
-@@todo a matrix of scatter plots ???  
+@@todo R use jitter to add noise
 
+@@todo a matrix of scatter plots ?
 
- 
+@@todo heatmap ?  
+
+!!Level Plot
+
+From here we can easily produce a level plot, giving to our scatter plot a gradient color to represent the Petal Width of our points. We also have to collect the Petal Width:
+
+[[[
+sepalWidthLengthCollections := speciesCollections collect: [ :col | col collect: [ :i | {i first. i second. i fourth} ] ].
+
+colorId := RTMultiLinearColorForIdentity new colors: {(Color veryLightGray). (Color black) }; objects: ((sepalWidthLengthCollections flatCollect: [:col | col collect: [:i | i third] ]) asArray sort).
+]]]
+
+And the grapher, only the shape and color change, using the Petal Width:
+[[[
+b := RTGrapher new.
+sepalWidthLengthCollections do: [ :i | 
+	| ds |
+	ds := RTDataSet new 
+	points: i;
+	x: [ :m | m first ];
+	y: [ :m | m second ].
+	ds dotShape rectangle color: [ :m | (colorId rtValue: m third)] ; size: 5.
+	b add: ds.	
+	].
+b build.
+]]]
++Level Plot>file://figures/levelPlot.png|width=80+
+
+@@todo ad a gradient scale next to the scatter maybe in a level plot builder ?
+
+@@todo The contour plot ?
