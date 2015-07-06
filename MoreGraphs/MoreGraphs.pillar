@@ -39,7 +39,7 @@ RTCellLayout new lineItemsCount:4; gapSize: 10; applyOn: view elements.
 
 @@todo not exactly same result than in R ?
 
-@@todo Easy way for correlation from the covariance matrix ? Why DhbStatisticalMoments can't take 4 columns ??
+@@todo Easy way for correlation from the covariance matrix ? 
 
 About correlation, We will need to divide our tables values by respective standard deviations of their respective columns.
  
@@ -60,5 +60,68 @@ sd2 := DhbFastStatisticalMoments new.
 (cell / (sd1 standardDeviation * sd2 standardDeviation)) round: 7]].
 ]]]
 
+@@todo problems of rounded when calculating covariance.
+
 +Correlation matrix>file://figures/table2.png|width=80+
+
+!!Box plot
+
+We will create in this part a graph of box plots over the sepal length, one for each of the different species of iris. We first need to divide our data to collect a collection per different species:
+
+[[[
+species := (iris collect: [ :i | i last ]) asSet.
+speciesCollections := species collect: [ :s | iris select: [:i | i last = s]].
+]]] 
+
+Then we collect their sepal length:
+[[[
+sepalLengthCollections := speciesCollections collect: [ :col | col collect: [ :i | i first ] ].
+]]]
+
+We now use the Roassal class RTBoxPlotDataSet combined with RTGrapher:
+
+[[[
+b := RTGrapher new.
+sepalLengthCollections do: [ :i | | ds |
+	ds := RTBoxPlotDataSet new.
+	ds points: i.
+	b add: ds.].
+b build.
+]]]
++Boxplot>file://figures/boxPlot.png|width=80+
+
+@@todo some fixes on RTBoxPlotDataSet
+
+!!scatter plot
+
+Here we create a scatter plot with the Sepal Width and the Sepal Length. As before we collect Sepal Width and lenght for each of different species:
+
+[[[
+sepalWidthLengthCollections := speciesCollections collect: [ :col | col collect: [ :i | {i first. i second} ] ].
+]]] 
+
+Now we can define a color identity of each species to difference them on the graph, and create our scatter plot using RTGrapher:
+
+[[[
+colorId := RTMultiLinearColorForIdentity new colors: {Color red. Color yellow. Color green }; objects: (sepalWidthLengthCollections asArray).
+	
+b := RTGrapher new.
+sepalWidthLengthCollections do: [ :i | 
+	| ds |
+	ds := RTDataSet new 
+	points: i;
+	x: [ :m | m first ];
+	y: [ :m | m second ].
+	ds dotShape circle color: ((colorId rtValue: i) alpha: 0.5); size: 5.
+	b add: ds.	
+	].
+b build.
+]]]
++Scatterplot>file://figures/scatter1.png|width=80+
+
+@@note To distinguish the probable overlaps between points, we can define a weaker alpha value for colors
+
+@@todo a matrix of scatter plots ???  
+
+
  
