@@ -60,9 +60,11 @@ sd2 := DhbFastStatisticalMoments new.
 (cell / (sd1 standardDeviation * sd2 standardDeviation)) round: 7]].
 ]]]
 
++Correlation matrix>file://figures/table2.png|width=80+
+
 @@todo problems of rounded when calculating covariance.
 
-+Correlation matrix>file://figures/table2.png|width=80+
+@@todo having a stat summary table creation ?
 
 !!Box plot
 
@@ -90,7 +92,7 @@ b build.
 ]]]
 +Boxplot>file://figures/boxPlot.png|width=80+
 
-@@todo some fixes on RTBoxPlotDataSet
+@@todo some fixes on RTBoxPlotDataSet, outliers aren't too big when not much box plots ? Probably it is defined on width of the box, box too big ?
 
 !!scatter plot
 

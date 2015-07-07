@@ -114,3 +114,7 @@ Note that in this case the histogram can also be used:
 ]]]
 +Histogram 3>file://figures/histo3.png|width=50+
 
+!!Density plot
+
+@@todo have to improve DhbHistogram based on RTDistribution (probably default behaviors) before we can do a right density plot
+
