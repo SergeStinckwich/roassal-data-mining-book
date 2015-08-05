@@ -1,25 +1,22 @@
 !Introduction
 
-This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
+This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining, associated with SciSmalltalk for the statistics calculs. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
 Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference. As to simplify the comparison of the two documents, we will use here the exact same datasets.
-
-Moreover, for more detailed explanations on some of incoming subjects see the Document "Object-Oriented Implementation of Numerical Methods An Introduction with Smalltalk" Didier H. Besset. The classes implemented in this Document are going to be needed. The SciSmalltalk project includes these, available at https://github.com/SergeStinckwich/SciSmalltalk.
 
 !!Data Mining
 
 @@todo petite introduction au data mining ?
 
-!!Roassal
+!!Roassal and SciSmalltalk
 
-@@todo intro Roassal, how to install it
+In some of the subjects, the datas are going to be processed using SciSmalltalk, a statistical package from "Object-Oriented Implementation of Numerical Methods An Introduction with Smalltalk" Didier H. Besset. See https://github.com/SergeStinckwich/SciSmalltalk.
+Then we will modelize these datas graphically using Roassal, http://smalltalkhub.com/#!/~ObjectProfile/Roassal2.
+This imply another project, the R-SimpleStatistic depending on both Roassal2 and SciSmalltalk. Here it is http://smalltalkhub.com/#!/~PierreChanson/R-SimpleStat. This project reunite Roassal2 and SciSmalltalk to visualize statistics. The aim is not only its modular characteristic, but also the simplified selection and use of SciSmalltalk classes needed for classic Data Mining analyzes. 
 
 !!A Principle of builders
 
 The idea of a Rossal builder is to make the creation of a modelisation faster, easier in term of code understanding but still flexible as much as possible.
 Based on that principle and given a list of builders, Roassal cover all the typical modelisations.
-
-Histogtam: RTGrapher combined with a RTHistogramSet   
-@@todo list of graphs and builders associated ?
 
 !!The DataSets
 We will use in our demonstrations and example the Iris Dataset. It contains 50 samples from each three classes of iris flowers Frank and Asuncion, 2010. One class is linearly separable from the other two, while the latter are not linearly separable from each other.  There
@@ -33,6 +30,22 @@ are five attributes in the dataset:
 
 !!Let's start !
 
-From now on, it will be assumed that the reader has a Pharo image opened with a recent version of Roassal installed in order to try the examples. 
+From now on, it will be assumed that the reader has a Pharo image opened with a recent version of Roassal and R-SimpleStat installed in order to try the examples.
+
+To get R-SimpleStat, Roassal2 and SciSmalltalk execute in your fresh Pharo image:
+[[[
+Gofer new
+smalltalkhubUser: 'PierreChanson' project: 'R-SimpleStat';
+package: 'ConfigurationOfSimpleStat';
+load. ConfigurationOfSimpleStat load
+]]]
+
+For NeoCSV, later use to import csv files:
+[[[
+Gofer new
+smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
+package: 'ConfigurationOfNeoCSV';
+load. ConfigurationOfNeoCSV load
+]]]
 
 In any case we will try to make this examples as clear as possible, and will always be executable in a Pharo workspace. Moreover, notice that we will show simple examples, the most direct way to the objective, but as Roassal is part of Pharo, a fully oriented-object programmation language and environnement, there is always a lot of other ways as complex and complete as desired to modelise our datas.

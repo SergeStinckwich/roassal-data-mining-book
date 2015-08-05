@@ -15,10 +15,6 @@ graph build.
 !!Histogram
 Coming back to our iris.csv content saw in the previous chapter we will now manage this datas to create an histogram on the frequency of the epal length.
 
-@@todo RTHistogramSet can't manage a gapSize
-
-@@todo RTHistogramSet should use SciSmalltalk histograms
-
 First we will process a bit our data to obtain usable datas for our histogram. As we just imported our datas from csv we will change the for first fields from String to Integer, and puts our datas in a variable:
 
 [[[
@@ -26,45 +22,49 @@ iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) )
    	  addIntegerField; addIntegerField; addIntegerField; addIntegerField; addField; upToEnd.
 ]]]
 
-We now need to take the first row of theses datas and ask Roassal to make the histogram:
+We now need to take the first row of theses datas and ask RSimpleStat to make the histogram:
 [[[
-(iris collect: [ :i | i first ]) histogram
+(iris collect: [ :i | i first ]) simpleHistogram
 ]]]	  
 
 and obtain our first histogram Figure1.
 
 +Histogram 1>file://figures/histo1.png|width=50+
 
-Having a look to the method histogram we can customize it easily, following the structure:
+@@note As reminder, this simple histogram is made using the class RSHistogram (RSimpleStat package). This class use the SOptimizedDistribution class (SimpleStat package) depending on the DhbHistogram class from SciSmalltalk. RSimpleStat reunite Roassal2 and SciSmalltalk to visualize statistics.
+
+Having a look to the method #simpleHistogram:, we can easily find our base builders structure and customize our own visualization easily:
 [[[
 b := RTGrapher new.
-b extent: 400@200.
 
 ds := RTHistogramSet new.
+ds distribution: SOptimizedHistogram new.
 ds points: (iris collect: [ :i | i first ]).
-ds barShape width: 40; color: Color darkGray.
-ds barChartWithBarTitle: [ :vls |  vls second average round:1  ] rotation: 0 color: Color black.
-
+ds barShape color: Color orange.
+		
 b add: ds. 
 b axisX title: 'Sepal.Length'.
 b axisY title: 'Frequency'.
-
-b build.
+b build
 ]]]
 
-@@todo RTDistribution does not work with String, merge with SciSmalltalk ? The histogram construction can be improved by knowing the width of the dataset 
-
-We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, add the data set to the grapher and build it.
+We create an instance of RTGrapher and an instance of RTHistogramSet. We define the points of our data set, we define which column to take in account, we also define that we want the SOptimizedHistogram distribution, using SciSmalltalk. We can change the color, add the data set to the grapher, change the axis title and build.
 
 +Histogram 2>file://figures/histo2.png|width=50+
 
 !!Density plot
 
+In a same way than histogram, you can generate a density plot based on a normal distribution using the SDensity class of SimpleStat or from a SequenceableCollection with #density, a method from the RSimpleStat package.
+
+[[[
+(iris collect: [ :i | i first ]) density
+]]]
++Density plot>file://figures/plot1.png|width=50+
+
 !!Pie chart
 
 The frequency of each iris names can be obtain in an annoted array this way:
 
-@@todo Distribution should be from SciSmalltalk
 [[[
 ds := RTDistribution new on: (iris collect: [ :i | i last ]); annotatedFrequencyOfDifferentObjects
 ]]] 
@@ -113,8 +113,3 @@ Note that in this case the histogram can also be used:
 (iris collect: [ :i | i last ]) histogram
 ]]]
 +Histogram 3>file://figures/histo3.png|width=50+
-
-!!Density plot
-
-@@todo have to improve DhbHistogram based on RTDistribution (probably default behaviors) before we can do a right density plot
-

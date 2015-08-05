@@ -6,7 +6,15 @@ The challenge here will most likely be to bring the datas inside Pharo before mo
 
 !!Import from CSV
 
-We will use the package NeoCSV to work with our CSV format datas. Let's assume that we dispose of this "iris.csv" file in the workdirectory of our Pharo image, that looks like this:
+We will use the package NeoCSV to work with our CSV format datas. You can load NeoCSV in your image using the catalog browser or directly: 
+[[[
+Gofer new
+smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
+package: 'ConfigurationOfNeoCSV';
+load. ConfigurationOfNeoCSV load
+]]]
+ 
+Let's assume that we dispose of this "iris.csv" file in the workdirectory of our Pharo image, that looks like this:
 
 [[[
 5.1,3.5,1.4,0.2,Iris-setosa
