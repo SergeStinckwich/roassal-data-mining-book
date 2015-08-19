@@ -1,8 +1,8 @@
 !Common graphs and builders
 In the introduction we talked about the Roassal builders to cover the most common modelisation in Data Mining. In this Chapter we will present and explain the functionning of these builders and create in examples histograms, bar plots, scatter plots, radar and pie charts etc...
-We will also discover and manage our datas.
+We will also discover and manage our data.
 
-In Roassal, simplicity comes with modularisation. In that case It is always easy to create a composition of graphs. Most of graphs like an histogram will need axises in adition to the visualization of datas itself. That is why in Roassal we will create this graph using a composition of two builders. Indeed the structure of a common graph will be composed of a RTGrapher, to manage the axises and then the dataSet is added to it. The RTGrapher is finally built.
+In Roassal, simplicity comes with modularisation. In that case It is always easy to create a composition of graphs. Most of graphs like an histogram will need axises in adition to the visualization of data itself. That is why in Roassal we will create this graph using a composition of two builders. Indeed the structure of a common graph will be composed of a RTGrapher, to manage the axises and then the dataSet is added to it. The RTGrapher is finally built.
 
 The graph structure using RTGrapher:
 [[[
@@ -13,16 +13,16 @@ graph build.
 ]]]
  
 !!Histogram
-Coming back to our iris.csv content saw in the previous chapter we will now manage this datas to create an histogram on the frequency of the epal length.
+Coming back to our iris.csv content saw in the previous chapter we will now manage this data to create an histogram on the frequency of the epal length.
 
-First we will process a bit our data to obtain usable datas for our histogram. As we just imported our datas from csv we will change the for first fields from String to Integer, and puts our datas in a variable:
+First we will process a bit our data to obtain usable data for our histogram. As we just imported our data from csv we will change the four first fields from String to Integer, and puts our data in a variable:
 
 [[[
 iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) 
    	  addIntegerField; addIntegerField; addIntegerField; addIntegerField; addField; upToEnd.
 ]]]
 
-We now need to take the first row of theses datas and ask RSimpleStat to make the histogram:
+We now need to take the first row of theses data and ask RSimpleStat to make the histogram:
 [[[
 (iris collect: [ :i | i first ]) simpleHistogram
 ]]]	  

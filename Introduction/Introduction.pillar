@@ -9,8 +9,8 @@ Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran
 
 !!Roassal and SciSmalltalk
 
-In some of the subjects, the datas are going to be processed using SciSmalltalk, a statistical package from "Object-Oriented Implementation of Numerical Methods An Introduction with Smalltalk" Didier H. Besset. See https://github.com/SergeStinckwich/SciSmalltalk.
-Then we will modelize these datas graphically using Roassal, http://smalltalkhub.com/#!/~ObjectProfile/Roassal2.
+In some of the subjects, the data are going to be processed using SciSmalltalk, a statistical package from "Object-Oriented Implementation of Numerical Methods An Introduction with Smalltalk" Didier H. Besset. See https://github.com/SergeStinckwich/SciSmalltalk.
+Then we will modelize these data graphically using Roassal, http://smalltalkhub.com/#!/~ObjectProfile/Roassal2.
 This imply another project, the R-SimpleStatistic depending on both Roassal2 and SciSmalltalk. Here it is http://smalltalkhub.com/#!/~PierreChanson/R-SimpleStat. This project reunite Roassal2 and SciSmalltalk to visualize statistics. The aim is not only its modular characteristic, but also the simplified selection and use of SciSmalltalk classes needed for classic Data Mining analyzes. 
 
 !!A Principle of builders
@@ -48,4 +48,4 @@ package: 'ConfigurationOfNeoCSV';
 load. ConfigurationOfNeoCSV load
 ]]]
 
-In any case we will try to make this examples as clear as possible, and will always be executable in a Pharo workspace. Moreover, notice that we will show simple examples, the most direct way to the objective, but as Roassal is part of Pharo, a fully oriented-object programmation language and environnement, there is always a lot of other ways as complex and complete as desired to modelise our datas.
+In any case we will try to make this examples as clear as possible, and will always be executable in a Pharo workspace. Moreover, notice that we will show simple examples, the most direct way to the objective, but as Roassal is part of Pharo, a fully oriented-object programmation language and environnement, there is always a lot of other ways as complex and complete as desired to modelise our data.

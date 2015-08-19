@@ -1,12 +1,12 @@
 !Datasets, Import and Export
 
-From inside Pharo, Roassal can take in entry different kind of datas, depending on the builder used. Simple data structures like collections or complexe dataset structures. For example, a RTBoxPlotDataSet will take a collection while the RTGrapher will take the RTBoxPlotDataSet itself. We will discuss the complex structure datasets that Roassal offers in the coming chapters.
+From inside Pharo, Roassal can take in entry different kind of data, depending on the builder used. Simple data structures like collections or complexe dataset structures. For example, a RTBoxPlotDataSet will take a collection while the RTGrapher will take the RTBoxPlotDataSet itself. We will discuss the complex structure datasets that Roassal offers in the coming chapters.
 
-The challenge here will most likely be to bring the datas inside Pharo before modulate them as will.
+The challenge here will most likely be to bring the data inside Pharo before modulate them as will.
 
 !!Import from CSV
 
-We will use the package NeoCSV to work with our CSV format datas. You can load NeoCSV in your image using the catalog browser or directly: 
+We will use the package NeoCSV to work with our CSV format data. You can load NeoCSV in your image using the catalog browser or directly: 
 [[[
 Gofer new
 smalltalkhubUser: 'SvenVanCaekenberghe' project: 'Neo';
@@ -51,11 +51,11 @@ Then we read this stream with NeoCSVReader, knowing or separators are comas, the
 (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) upToEnd.
 ]]]
 
-At this point or datas are imported in Pharo and perfectly usable !
+At this point or data are imported in Pharo and perfectly usable !
 
-Note that by inspecting it we get an Array (size 150), of arrays (size 5), which represent well our iris datas.
+Note that by inspecting it we get an Array (size 150), of arrays (size 5), which represent well our iris data.
 
-@@todo could be interesting to have a method summary that create a table resume of our datas
+@@todo could be interesting to have a method summary that create a table resume of our data
 
 We can also import the csv file from an URL. In that case:
 
@@ -65,7 +65,7 @@ We can also import the csv file from an URL. In that case:
 
 !!Export to CSV
 
-We can easily export datas to csv format using NeoCSVWritter. For example:
+We can easily export data to csv format using NeoCSVWritter. For example:
 
 [[[
 String streamContents: [ :stream |
@@ -75,7 +75,7 @@ String streamContents: [ :stream |
 
 !!Import via SQLite3
 
-It exist other pharo packages, external from Roassal, to import datas into Pharo. Here is an example with the NBSQLite3 package to import .db files and extarct a perfectly usable content for Roassal.
+It exist other pharo packages, external from Roassal, to import data into Pharo. Here is an example with the NBSQLite3 package to import .db files and extarct a perfectly usable content for Roassal.
 
 @@todo a complete example ? Reference other Sources (more complex installation, specially Linux)?
 

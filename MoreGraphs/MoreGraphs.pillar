@@ -5,7 +5,7 @@ This chapter is about investigations on multiple variables in the same of our da
 @@note more about covariance can be found on a more detailed document: NumericalMethods, see Introduction, the classes implemented in this Document are going to be needed available at https://github.com/SergeStinckwich/SciSmalltalk
 
 !!Covariance and correlation
-First we will investigate covariance between columns of our datas. Let's take out the last column:
+First we will investigate covariance between columns of our data. Let's take out the last column:
 [[[
 iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) ) 
    	  addIntegerField; addIntegerField; addIntegerField; addIntegerField; addField; upToEnd.
