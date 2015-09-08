@@ -13,27 +13,16 @@ iris := (NeoCSVReader on: ('iris.csv' asFileReference contents readStream) )
 ds := iris collect: [ :i | i allButLast ].	
 ]]]	
 
-Then we can get or covariance matrix using the DhbCovarianceAccumulator class:
+Then we can get or covariance matrix using theSCovarianceMatrix class from SimpleStat:
 [[[
-accumulator := DhbCovarianceAccumulator new: 4.
-
-ds do: [ :x | accumulator accumulate: x].
-covarianceMatrix := accumulator covarianceMatrix.
+matrix := SCovarianceMatrix new on: ds; matrix.
 ]]]	
 
 @@todo DhbCovarianceAccumulator missing method to have a direct covariance between two columns ? Add method to easily round all cells ?
 
-@@todo nice tables in Roassal ?
-
-And print the result in a nice table:
+And print the result in a nice table using RSTable from RSimpleStat:
 [[[
-view := RTView new.
-substrings := #('Sepal.Length' 'Sepal.Width' 'Petal.Length' 'Petal.Width') asOrderedCollection.
-table do: [:r |
-	r do: [ :cell | substrings add: cell asString ]].
-view addAll: (RTLabel elementsOn: substrings).
-RTCellLayout new lineItemsCount:4; gapSize: 10; applyOn: view elements.
-^ view
+RSTable new matrix: matrix; columnAndRowTitles: #('Sepal.Length' 'Sepal.Width' 'Petal.Length' 'Petal.Width'); render
 ]]]
 +Covariance matrix>file://figures/table1.png|width=80+
 
