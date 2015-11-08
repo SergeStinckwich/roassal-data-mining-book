@@ -1,3 +1,6 @@
+/!\ Latest version of that work is now on the SimpleStatistics PharoInProgress chapter, https://github.com/SquareBracketAssociates/PharoInProgress
+
+
 This book has the goal of proving the efficiency and simplicity of Roassal concerning modelisations for data mining. It exposes most commons techniques of modelisation for data mining, each of them performed using Roassal and explained.
 Highly inspired from "R and Data Mining: Examples and Case Studies" (http://cran.r-project.org/doc/contrib/Zhao_R_and_data_mining.pdf), Y. Zhao, as reference.
 
